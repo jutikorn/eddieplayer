@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".list.view.MainFragment">
+
+    <data>
+
+        <variable
+            name="decor"
+            type="com.jutikorn.eddieplayer.common.view.SeparatorItemDecoration" />
+
+        <variable
+            name="adapter"
+            type="com.jutikorn.eddieplayer.musiclist.view.MusicAdapter" />
+
+        <variable
+            name="components"
+            type="com.jutikorn.eddieplayer.musiclist.structure.di.MusicListComponent" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:onRefresh="@{()-> components.interactor.fetchMusic(components.viewModel.songsLiveData, components.viewModel.errorLiveData)}"
+            app:isRefreshing="@{components.interactor.isLoading}">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/musicListRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:adapter="@{adapter}"
+                app:decoration="@{decor}"
+                app:hasFixSize="@{true}"
+                app:isVisible="@{!components.interactor.isLoading}"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                app:lifeCyclerOwner="@{components.lifecycleOwner}"
+                app:livedata="@{components.viewModel.songsLiveData}" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </FrameLayout>
+
+</layout>

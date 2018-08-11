@@ -1,0 +1,24 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/mainFragment">
+
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.jutikorn.eddieplayer.musiclist.view.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/open_song"
+            app:destination="@id/songFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/songFragment"
+        android:name="com.jutikorn.eddieplayer.song.view.SongFragment"
+        android:label="SongFragment"
+        tools:layout="@layout/fragment_song" >
+
+        <argument android:name="song" app:argType="com.jutikorn.eddieplayer.musiclist.structure.entity.Song"/>
+    </fragment>
+</navigation>

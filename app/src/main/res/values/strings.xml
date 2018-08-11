@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">EddiePlayer</string>
+    <string name="arg_song">arg_song</string>
+</resources>
